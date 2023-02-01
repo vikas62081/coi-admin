@@ -1,0 +1,51 @@
+/* Styles for Ag grid table base theam */
+.ag-theme-material {
+  --ag-foreground-color: #002e3a;
+  --ag-data-color: ag-derived(foreground-color);
+  --ag-secondary-foreground-color: ag-derived(foreground-color);
+  --ag-header-foreground-color: ag-derived(secondary-foreground-color);
+  --ag-background-color: #ffffff;
+  --ag-selected-row-background-color: ag-derived(background-color, $mix: foreground-color 25%);
+}
+
+/* Adding color to check box in ag grid table  */
+.ag-wrapper.ag-input-wrapper.ag-checkbox-input-wrapper.ag-checked::after {
+  color: #3fba8d;
+}
+
+/* Adding font styles to table header */
+.ag-theme-material .ag-header-cell-label {
+  font-family: PTRootUIWebLight;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+}
+/* Adding font styles to table cell */
+.ag-theme-material .ag-row {
+  font-family: PTRootUIWebLight;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+}
+/* Diver between table header and cells */
+.ag-theme-material .ag-header-cell {
+  border-bottom: 2px solid #3fba8d;
+}
+.ag-set-filter-item.ag-set-filter-select-all {
+  border-bottom: none !important;
+}
+/* Hiding filter options */
+.ag-filter-select.ag-labeled.ag-label-align-left.ag-select {
+  display: none;
+}
+/*  filter styles for text, dropdown, number */
+.ag-wrapper.ag-input-wrapper.ag-text-field-input-wrapper .ag-input-field-input.ag-input-field-input {
+  border-bottom: 1px #3fba8d solid;
+}
+.ag-wrapper.ag-input-wrapper.ag-number-field-input-wrapper .ag-input-field-input.ag-number-field-input {
+  border-bottom: 1px #3fba8d solid;
+}
+/* Removing boder border bowttom for filter */
+.ag-tabs-header.ag-menu-header .ag-tab.ag-tab-selected {
+  border-bottom: none;
+}

@@ -1,0 +1,11 @@
+.App {
+  color: #fff;
+  padding: 0 10px;
+}
+.ag-root-wrapper{
+  border-radius: 8px;
+}
+.MuiDrawer-docked{
+  background: transparent !important;
+}
+
