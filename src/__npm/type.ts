@@ -1,12 +1,12 @@
 import { AppBarProps } from "@mui/material";
 import { ReactElement } from "react";
-
 export interface IListProps {
   title: string;
-  icon: ReactElement;
+  icon?: string | ReactElement;
   to?: string;
 }
 export type SideBarProps = {
+  children?: any;
   checked?: boolean;
   sideBarItems?: IListProps[];
   company?: string;
@@ -14,10 +14,10 @@ export type SideBarProps = {
   phone?: string;
   email?: string;
   image?: string;
+  topSpace?: boolean;
   isEnterpriseChild: boolean;
   activeIndex?: number;
   initialState?: boolean;
-  children?: ReactElement;
 };
 
 export type SidebarItemProps = {

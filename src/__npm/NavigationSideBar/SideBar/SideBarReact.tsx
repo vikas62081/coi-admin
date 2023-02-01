@@ -1,15 +1,15 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { Drawer } from "../Drawer/Drawer";
+import { Drawer, TOP } from "../Drawer/Drawer";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeftRounded";
 import ChevronRightIcon from "@mui/icons-material/ChevronRightRounded";
 import { GridContainer, GridItem, MyIconButton } from "../navigation.styles";
 import { SideBarFooter } from "../SideBarFooter/SideBarFooter";
 
 import { Grid } from "@mui/material";
-import { SideBarItemReact } from "../SideBarItems/SideBarItemsReact";
-import { SideBarProps } from "../type";
 import { COLORS } from "../../colors";
+import { SideBarItemReact } from "../SideBarItems/SideBarItemsReact";
+import { SideBarProps } from "../../type";
 
 export const SideBarReact = ({
   children,
@@ -21,6 +21,7 @@ export const SideBarReact = ({
   email,
   image,
   isEnterpriseChild,
+  topSpace = true,
   initialState = false,
   ...rest
 }: SideBarProps) => {
@@ -32,7 +33,11 @@ export const SideBarReact = ({
 
   return (
     <Box sx={{ display: "flex" }} data-testid="nextGen-sideBar">
-      <Drawer variant="permanent" open={open}>
+      <Drawer
+        variant="permanent"
+        open={open}
+        style={{ top: topSpace ? TOP : 0 }}
+      >
         <SideBarItemReact
           sideBarItems={sideBarItems}
           activeIndex={activeIndex}

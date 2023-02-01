@@ -18,13 +18,6 @@ import routes from "./utils/routes";
 import { SideBarReact } from "./__npm/NavigationSideBar/SideBar/SideBarReact";
 import { sidebarData } from "./mockedData";
 
-const router = createBrowserRouter([
-  ...routes,
-  {
-    path: "*",
-    element: <ErrorPage />,
-  },
-]);
 const root = createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <React.StrictMode>

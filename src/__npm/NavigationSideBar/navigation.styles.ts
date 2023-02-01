@@ -1,4 +1,5 @@
 import { makeStyles } from "@mui/styles";
+import { COLORS, THEME_PROVIDER } from "../colors";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 import {
@@ -10,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import { TOP } from "./Drawer/Drawer";
-import { COLORS, THEME_PROVIDER } from "../colors";
 
 export const useStyles = makeStyles({
   hide: {
@@ -31,17 +31,17 @@ export const useStyles = makeStyles({
   notSelected: {
     color: THEME_PROVIDER.notSelected.color,
     "&:hover": {
-      background: THEME_PROVIDER.notSelected.bg,
+      background: `${THEME_PROVIDER.notSelected.bg} !important`,
       borderRadius: "4px",
       color: THEME_PROVIDER.notSelected.color,
     },
   },
   selected: {
-    background: `${THEME_PROVIDER.selected.bg} !important`,
+    background: THEME_PROVIDER.selected.bg,
     color: THEME_PROVIDER.selected.color,
-    borderRadius: "4px !important",
+    borderRadius: "4px",
     "&:hover": {
-      background: THEME_PROVIDER.selected.bg,
+      background: `${THEME_PROVIDER.selected.bg} !important`,
       color: THEME_PROVIDER.selected.color,
       borderRadius: "4px",
     },
@@ -98,6 +98,7 @@ export const StyledMenu = styled(Button)({
 export const ClientCard = styled(Card)({
   backgroundColor: THEME_PROVIDER.client,
   margin: 16,
+  width: 230,
 });
 export const StyledTypography = styled(Typography)({
   textAlign: "center",
@@ -142,15 +143,14 @@ export const GridItem = styled(Grid)({
   sm: 12,
 });
 export const MyIconButton = styled(IconButton)({
-  background: `${THEME_PROVIDER.secondary} !important`,
+  background: THEME_PROVIDER.secondary,
   borderRadius: 4,
-  border: "1px black solid",
   position: "fixed",
   width: 32,
   height: 32,
   marginRight: -14,
   bottom: 140,
   "&:hover": {
-    background: `${THEME_PROVIDER.selected.bg} !important`,
+    background: THEME_PROVIDER.secondary,
   },
 });

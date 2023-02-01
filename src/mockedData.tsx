@@ -18,6 +18,7 @@ export const sidebarData = {
   phone: "708-252-0235",
   activeIndex: 2,
   image: "",
+  topSpace: false,
   sideBarItems: [
     {
       title: "Home",

@@ -6,7 +6,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useStyles } from "../navigation.styles";
 import { Link } from "react-router-dom";
-import { IListProps, SidebarItemProps } from "../type";
+import { IListProps, SidebarItemProps } from "../../type";
 
 export const SideBarItemReact = (props: SidebarItemProps) => {
   const [activeItem, setActiveItem] = useState(0);
