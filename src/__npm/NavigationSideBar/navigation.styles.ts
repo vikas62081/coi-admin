@@ -36,10 +36,11 @@ export const useStyles = makeStyles({
       color: THEME_PROVIDER.notSelected.color,
     },
   },
+  //replace selected in empower package
   selected: {
-    background: THEME_PROVIDER.selected.bg,
+    background: `${THEME_PROVIDER.selected.bg} !important`,
     color: THEME_PROVIDER.selected.color,
-    borderRadius: "4px",
+    borderRadius: "4px !important",
     "&:hover": {
       background: `${THEME_PROVIDER.selected.bg} !important`,
       color: THEME_PROVIDER.selected.color,

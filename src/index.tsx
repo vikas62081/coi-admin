@@ -4,34 +4,14 @@ import "./index.css";
 import App from "./app/App";
 import reportWebVitals from "./reportWebVitals";
 import ReduxProvider from "./store/reduxProvider";
-import {
-  BrowserRouter,
-  createBrowserRouter,
-  Route,
-  RouterProvider,
-  Routes,
-  useRouteError,
-} from "react-router-dom";
-import { Link } from "react-router-dom";
-import ErrorPage from "./components/Error";
-import routes from "./utils/routes";
-import { SideBarReact } from "./__npm/NavigationSideBar/SideBar/SideBarReact";
-import { sidebarData } from "./mockedData";
+
+import AppRouter from "./Router";
 
 const root = createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <React.StrictMode>
     <ReduxProvider>
-      <BrowserRouter>
-        <SideBarReact {...sidebarData}>
-          {/* <RouterProvider router={router} /> */}
-          <Routes>
-            {routes.map((d) => (
-              <Route {...d} />
-            ))}
-          </Routes>
-        </SideBarReact>
-      </BrowserRouter>
+      <AppRouter />
     </ReduxProvider>
   </React.StrictMode>,
 );

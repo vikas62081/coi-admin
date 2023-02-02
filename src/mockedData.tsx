@@ -26,62 +26,35 @@ export const sidebarData = {
       to: "/",
     },
     {
-      title: "Permission Management Microservice",
-      icon: <ListAltRoundedIcon />,
-      to: "/permission-management-microservice",
-    },
-    {
       title: "Tenant Management",
-      icon: <ListAltRoundedIcon />,
+      icon: <PeopleAltRoundedIcon />,
       to: "/tenant-management",
     },
     {
+      title: "Identity Microservice",
+      icon: <SpeedRoundedIcon />,
+      to: "/identity-microservice",
+    },
+    {
       title: "Auditlog Microservice",
-      icon: <ListAltRoundedIcon />,
+      icon: <LeaderboardRoundedIcon />,
       to: "/auditlog-microservice",
     },
     {
-      title: "Feature Management Microservice",
-      icon: <ListAltRoundedIcon />,
-      to: "/feature-management-microservice",
+      title: "Permission Management Microservice",
+      icon: <ViewQuiltRoundedIcon />,
+      to: "/permission-management-microservice",
     },
     {
-      title: "Identity Microservice",
-      icon: <ListAltRoundedIcon />,
-      to: "/identity-microservice",
+      title: "Feature Management Microservice",
+      icon: <BookmarkRoundedIcon />,
+      to: "/feature-management-microservice",
     },
 
     {
       title: "Configuration Microservice",
-      icon: <ListAltRoundedIcon />,
+      icon: <FolderRoundedIcon />,
       to: "/configuration-microservice",
-    },
-  ],
-};
-
-export const headerData = {
-  clientId: "Kim",
-  userName: "TestUser",
-
-  menuList: [
-    {
-      title: "Account Settings",
-      icon: <SettingsIcon />,
-    },
-    {
-      title: "Change Password",
-      icon: <LockIcon />,
-    },
-    {
-      title: "Log out",
-      icon: <LogoutOutlinedIcon />,
-    },
-  ],
-  optionList: [
-    {
-      title: "Sign Out",
-      icon: "",
-      to: "/to",
     },
   ],
 };
