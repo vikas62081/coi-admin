@@ -4246,7 +4246,7 @@ emojis-list@^3.0.0:
   resolved "https://pkgs.dev.azure.com/myCOI/_packaging/myCOI-Empower-NPM/npm/registry/emojis-list/-/emojis-list-3.0.0.tgz#5570662046ad29e2e916e71aae260abdff4f6a78"
   integrity sha1-VXBmIEatKeLpFucariYKvf9Pang=
 
-empower-ui-react-components@0.1.4:
+empower-ui-react-components@^0.1.4:
   version "0.1.4"
   resolved "https://pkgs.dev.azure.com/myCOI/_packaging/myCOI-Empower-NPM/npm/registry/empower-ui-react-components/-/empower-ui-react-components-0.1.4.tgz#c58017efd8eed3662b1aa22ae6eeffd3ef78712b"
   integrity sha1-xYAX79ju02YrGqIq5u7/0+94cSs=
