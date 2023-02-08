@@ -1,8 +1,7 @@
-import React from "react";
+import { SideBarReact } from "empower-ui-react-components";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { sidebarData } from "../mockedData";
 import routes from "../utils/routes";
-import { SideBarReact } from "../__npm/NavigationSideBar/SideBar/SideBarReact";
 const AppRouter = () => {
   return (
     <>
