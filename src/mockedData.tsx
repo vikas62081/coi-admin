@@ -9,6 +9,10 @@ import HelpRoundedIcon from "@mui/icons-material/HelpRounded";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import LockIcon from "@mui/icons-material/Lock";
+import FingerprintIcon from "@mui/icons-material/Fingerprint";
+import FactCheckIcon from "@mui/icons-material/FactCheck";
+import MapIcon from "@mui/icons-material/Map";
+import BadgeIcon from "@mui/icons-material/Badge";
 
 export const sidebarData = {
   isEnterpriseChild: true,
@@ -21,38 +25,35 @@ export const sidebarData = {
   topSpace: false,
   sideBarItems: [
     {
-      title: "Home",
-      icon: <ListAltRoundedIcon />,
-      to: "/",
-    },
-    {
-      title: "Tenant Management",
-      icon: <PeopleAltRoundedIcon />,
-      to: "/tenant-management",
-    },
-    {
-      title: "Identity Microservice",
-      icon: <SpeedRoundedIcon />,
+      title: "Identity",
+      icon: <FingerprintIcon />,
       to: "/identity-microservice",
     },
     {
-      title: "Auditlog Microservice",
-      icon: <LeaderboardRoundedIcon />,
-      to: "/auditlog-microservice",
-    },
-    {
-      title: "Permission Management Microservice",
-      icon: <ViewQuiltRoundedIcon />,
-      to: "/permission-management-microservice",
-    },
-    {
-      title: "Feature Management Microservice",
-      icon: <BookmarkRoundedIcon />,
-      to: "/feature-management-microservice",
+      title: "Tenant",
+      icon: <PeopleAltRoundedIcon />,
+      to: "/tenant-management",
     },
 
     {
-      title: "Configuration Microservice",
+      title: "Auditlog",
+      icon: <MapIcon />,
+      to: "/auditlog-microservice",
+    },
+
+    {
+      title: "Feature",
+      icon: <FactCheckIcon />,
+      to: "/feature-management-microservice",
+    },
+    {
+      title: "Permission",
+      icon: <BadgeIcon />,
+      to: "/permission-management-microservice",
+    },
+
+    {
+      title: "Configuration",
       icon: <FolderRoundedIcon />,
       to: "/configuration-microservice",
     },

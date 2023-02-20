@@ -9,7 +9,7 @@ const AppRouter = () => {
         <SideBarReact {...sidebarData}>
           <Routes>
             {routes.map((d) => (
-              <Route {...d} />
+              <Route key={d?.path} {...d} />
             ))}
           </Routes>
         </SideBarReact>
