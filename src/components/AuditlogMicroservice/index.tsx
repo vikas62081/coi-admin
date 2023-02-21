@@ -1,5 +1,84 @@
 import AdminTable from "../AdminTable/adminTable";
-import ComingSoonPlaceholder from "../common/ComingSoon/ComingSoonPlaceholder";
+const userConfig = [
+  {
+    title: "ID",
+    name: "id",
+    type: "select",
+    required: true,
+    size: "small",
+    choices: [
+      { title: "One", value: 1 },
+      { title: "Two", value: 2 },
+    ],
+  },
+  {
+    title: "Action",
+    name: "action",
+    type: "select",
+    required: true,
+    size: "small",
+    choices: [
+      { title: "Option1", value: 1 },
+      { title: "Option2", value: 2 },
+    ],
+  },
+
+  {
+    title: "Database",
+    name: "database",
+    type: "select",
+    required: true,
+    size: "small",
+    choices: [
+      { title: "Option1", value: 1 },
+      { title: "Option2", value: 2 },
+    ],
+  },
+  {
+    title: "Object",
+    name: "object",
+    type: "select",
+    required: true,
+    size: "small",
+    choices: [
+      { title: "Option1", value: 1 },
+      { title: "Option2", value: 2 },
+    ],
+  },
+  {
+    title: "object_id",
+    name: "objectId",
+    type: "select",
+    required: true,
+    size: "small",
+    choices: [
+      { title: "Option1", value: 1 },
+      { title: "Option2", value: 2 },
+    ],
+  },
+  {
+    title: "Log",
+    name: "log",
+    type: "select",
+    required: true,
+    size: "small",
+    choices: [
+      { title: "Option1", value: 1 },
+      { title: "Option2", value: 2 },
+    ],
+  },
+  {
+    title: "User",
+    name: "user",
+    type: "select",
+    required: true,
+    size: "small",
+    choices: [
+      { title: "Option1", value: 1 },
+      { title: "Option2", value: 2 },
+    ],
+  },
+];
 const DATA = [
   {
     auditlog_id: 1,
@@ -59,6 +138,8 @@ function AuditlogMicroservice() {
       rowData={DATA}
       columnData={columns}
       title="Auditlog Microservice"
+      onSubmit={(values: any) => console.log(values)}
+      formConfig={userConfig}
     />
   );
 }

@@ -1,5 +1,107 @@
 import AdminTable from "../AdminTable/adminTable";
-import ComingSoonPlaceholder from "../common/ComingSoon/ComingSoonPlaceholder";
+const userConfig = [
+  {
+    title: "Tenant",
+    name: "tenantName",
+    type: "select",
+    required: true,
+    size: "small",
+    choices: [
+      { title: "One", value: 1 },
+      { title: "Two", value: 2 },
+    ],
+  },
+  {
+    title: "Type",
+    name: "username",
+    type: "select",
+    required: true,
+    size: "small",
+    choices: [
+      { title: "Option1", value: 1 },
+      { title: "Option2", value: 2 },
+    ],
+  },
+  {
+    title: "Nickname",
+    name: "nickname",
+    type: "text",
+    required: true,
+    placeholder: "Enter nickname",
+  },
+  {
+    title: "Configuration Connection",
+    name: "configurationConnection",
+    type: "select",
+    required: true,
+    size: "small",
+    choices: [
+      { title: "Option1", value: 1 },
+      { title: "Option2", value: 2 },
+    ],
+  },
+  {
+    title: "Language Name",
+    name: "languageName",
+    type: "select",
+    required: true,
+    size: "small",
+    choices: [
+      { title: "Option1", value: 1 },
+      { title: "Option2", value: 2 },
+    ],
+  },
+  {
+    title: "Time Zone",
+    name: "timeZone",
+    type: "select",
+    required: true,
+    size: "small",
+    choices: [
+      { title: "Option1", value: 1 },
+      { title: "Option2", value: 2 },
+    ],
+  },
+  {
+    title: "Theme Name",
+    name: "themeName",
+    type: "select",
+    required: true,
+    size: "small",
+    choices: [
+      { title: "Option1", value: 1 },
+      { title: "Option2", value: 2 },
+    ],
+  },
+  {
+    title: "Central Client's ID",
+    name: "centralClientId",
+    type: "select",
+    required: true,
+    size: "small",
+    choices: [
+      { title: "Option1", value: 1 },
+      { title: "Option2", value: 2 },
+    ],
+  },
+  {
+    title: "Enterprise Parent Tenant",
+    name: "enterpriseParentTenant",
+    type: "select",
+    required: true,
+    size: "small",
+    choices: [
+      { title: "Option1", value: 1 },
+      { title: "Option2", value: 2 },
+    ],
+  },
+  {
+    title: "Deleted",
+    name: "deleted",
+    type: "switch",
+    required: false,
+  },
+];
 const DATA = [
   {
     name: "Tenant 1",
@@ -106,7 +208,14 @@ const columns = [
 ];
 function TenantManagement() {
   return (
-    <AdminTable rowData={DATA} columnData={columns} title="Tenant Management" />
+    <AdminTable
+      rowData={DATA}
+      columnData={columns}
+      title="Tenant Management"
+      onSubmit={(values: any) => console.log(values)}
+      // initialState={initialState}
+      formConfig={userConfig}
+    />
   );
 }
 
