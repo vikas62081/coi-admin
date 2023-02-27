@@ -56,7 +56,7 @@ export const DynamicFormBuilder = ({
         {formConfig?.map((conf: any, index: number) => (
           <Grid xs={6} item key={conf?.title}>
             {getFormBuilder(conf, values, onChange)}
-            {index % 2 == 0 && <hr style={hrStyle} />}
+            {index % 2 === 0 && <hr style={hrStyle} />}
           </Grid>
         ))}
         <Grid container spacing={1}>

@@ -25,7 +25,9 @@ const MyCoiToggleButton = ({
       aria-label="tabs"
     >
       {options?.map((option: string) => (
-        <ToggleButton value={option}>{option}</ToggleButton>
+        <ToggleButton key={option} value={option}>
+          {option}
+        </ToggleButton>
       ))}
     </ToggleButtonGroup>
   );
