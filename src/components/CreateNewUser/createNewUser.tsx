@@ -77,7 +77,7 @@ function CreateUser({
               <Grid item xs={9}>
                 <Grid
                   container
-                  xs={8}
+                  xs={9}
                   direction="row"
                   columnSpacing={1}
                   style={{
