@@ -83,6 +83,7 @@ function AdminTable({
   const handleOpen = () => {
     setOpen(true);
   };
+
   return (
     <div className="App">
       <Grid style={{ paddingLeft: 16 }}>
@@ -130,6 +131,7 @@ function AdminTable({
           onSubmit={onSubmit}
           initialState={initState}
           formConfig={formConfig}
+          handleDelete={onDeleting}
           isEdit={isEdit}
         />
       </Grid>
