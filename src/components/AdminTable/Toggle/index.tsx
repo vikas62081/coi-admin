@@ -1,7 +1,28 @@
 import * as React from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import { styled } from "@mui/material/styles";
 
+const StyledToggleButton = styled(ToggleButton)(() => ({
+  background: "#CBD5E1",
+  color: "#304760",
+  borderColor: "#304760",
+  outlineWidth: "1px",
+  outlineStyle: "solid",
+  margin: "1px",
+  "&:hover": {
+    color: "#304760",
+    backgroundColor: "#F2F5FA",
+  },
+  "&.Mui-selected": {
+    color: "#0C2744",
+    backgroundColor: "#FFFFFF",
+  },
+  "&.Mui-selected, &.Mui-selected:hover": {
+    color: "#0C2744",
+    backgroundColor: "#FFFFFF",
+  },
+}));
 const MyCoiToggleButton = ({
   options = [],
   active = options[0],
@@ -17,7 +38,7 @@ const MyCoiToggleButton = ({
   return (
     <ToggleButtonGroup
       color="primary"
-      style={{ background: "#fff", marginBottom: 5 }}
+      style={{ marginBottom: 5 }}
       value={active}
       exclusive
       size="small"
@@ -25,9 +46,9 @@ const MyCoiToggleButton = ({
       aria-label="tabs"
     >
       {options?.map((option: string) => (
-        <ToggleButton key={option} value={option}>
+        <StyledToggleButton key={option} value={option}>
           {option}
-        </ToggleButton>
+        </StyledToggleButton>
       ))}
     </ToggleButtonGroup>
   );

@@ -1,9 +1,9 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./app/App";
+import './services';
 import reportWebVitals from "./reportWebVitals";
-import ReduxProvider from "./store/reduxProvider";
+import ReduxProvider from "./redux/store/reduxProvider";
 
 import AppRouter from "./Router";
 

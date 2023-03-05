@@ -1,27 +1,12 @@
-import ListAltRoundedIcon from "@mui/icons-material/ListAltRounded";
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
-import SpeedRoundedIcon from "@mui/icons-material/SpeedRounded";
-import ViewQuiltRoundedIcon from "@mui/icons-material/ViewQuiltRounded";
-import LeaderboardRoundedIcon from "@mui/icons-material/LeaderboardRounded";
-import BookmarkRoundedIcon from "@mui/icons-material/BookmarkRounded";
-import FolderRoundedIcon from "@mui/icons-material/FolderRounded";
-import HelpRoundedIcon from "@mui/icons-material/HelpRounded";
-import SettingsIcon from "@mui/icons-material/Settings";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import LockIcon from "@mui/icons-material/Lock";
 import FingerprintIcon from "@mui/icons-material/Fingerprint";
 import FactCheckIcon from "@mui/icons-material/FactCheck";
 import MapIcon from "@mui/icons-material/Map";
 import BadgeIcon from "@mui/icons-material/Badge";
+import DisplaySettingsIcon from "@mui/icons-material/DisplaySettings";
 
 export const sidebarData = {
-  isEnterpriseChild: true,
-  company: "Company Name",
-  address: "2642 Ross Street #1138c Chicago, IL ",
-  email: "morehumanthanhuman.com",
-  phone: "708-252-0235",
-  activeIndex: 2,
-  image: "",
+  isEnterpriseChild: false,
   topSpace: false,
   sideBarItems: [
     {
@@ -54,7 +39,7 @@ export const sidebarData = {
 
     {
       title: "Configuration",
-      icon: <FolderRoundedIcon />,
+      icon: <DisplaySettingsIcon />,
       to: "/configuration-microservice",
     },
   ],

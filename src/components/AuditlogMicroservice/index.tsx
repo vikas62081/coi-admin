@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import jwtAxios from "../../services/auth/jwt-auth";
+import { Auditlog } from "../../types/models/apps/auditlog";
 import AdminTable from "../AdminTable/adminTable";
 const userConfig = [
   {
@@ -132,10 +135,17 @@ const columns = [
   { headerName: "Created", field: "created" },
   { headerName: "Created By", field: "created_by" },
 ];
-function AuditlogMicroservice() {
+const AuditlogMicroservice = () => {
+  const [data, setData] = useState([] as Auditlog[]);
+
+  useEffect(() => {
+    jwtAxios.get('api/v1/auditlog').then((request) => setData(request.data));
+  },[]);
+
+
   return (
     <AdminTable
-      rowData={DATA}
+      rowData={data}
       columnData={columns}
       title="Auditlog Microservice"
       onSubmit={(values: any) => console.log(values)}

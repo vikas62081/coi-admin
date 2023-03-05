@@ -30,7 +30,7 @@ export const DynamicFormBuilder = ({
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    onSubmit(values);
+    onSubmit(values, isEdit);
   };
 
   const handleReset = useCallback(() => {

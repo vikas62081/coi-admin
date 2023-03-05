@@ -19,3 +19,14 @@ code {
   margin-top:35vh;
   justify-content: center;
 }
+.action-icon {
+  display: none !important;
+}
+
+/* ag-grid adds ag-row-hover class on row hover */
+/* .ag-row-hover .action-icon {
+  display: initial !important;
+} */
+.ag-row-selected .action-icon {
+  display: initial !important;
+}

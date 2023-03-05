@@ -20,10 +20,12 @@ function AdminTable({
   onSubmit,
   initialState = {},
   formConfig,
+  onDeleting,
 }: any) {
   const [gridApi, setGridApi] = useState<any>();
   const [open, setOpen] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [initState, setInitState] = useState(initialState);
   const defColumnDefs = {
     flex: 1,
@@ -43,47 +45,52 @@ function AdminTable({
   const onEditing = (data: any) => {
     allowEditing(data);
   };
-
-  const onDeleting = (data: any) => {
-    alert(JSON.stringify(data));
+  const onDeleteModalCancel = () => {
+    setShowDeleteModal(false);
   };
-  const actions = [
-    {
-      headerName: "Actions",
-      cellRenderer: ActionCellRenderer,
-      cellRendererParams: {
-        onEditing,
-        onDeleting,
-      },
-      pinned: "right",
-      width: 10,
-      filter: false,
-      editable: false,
-      sortable: false,
-    },
-  ];
+  const onDeleteModalSubmit = () => {};
+  // const actions = [
+  //   {
+  //     headerName: "Actions",
+  //     cellRenderer: ActionCellRenderer,
+  //     cellRendererParams: {
+  //       onEditing,
+  //       onDeleting,
+  //     },
+  //     pinned: "right",
+  //     width: 10,
+  //     filter: false,
+  //     editable: false,
+  //     sortable: false,
+  //   },
+  // ];
 
   const onGridReady = (params: any) => {
     setGridApi(params);
   };
 
-  const columns = gridApi?.api?.getColumnDefs();
-  useEffect(() => {
-    if (columns) {
-      const addAction = columns[columns?.length - 1]?.headerName !== "Actions";
-      if (addAction) {
-        gridApi.api.setColumnDefs([...columns, ...actions]);
-      }
-    }
-  }, [columns]);
+  // const columns = gridApi?.api?.getColumnDefs();
+  // useEffect(() => {
+  //   if (columns) {
+  //     const addAction = columns[columns?.length - 1]?.headerName !== "Actions";
+  //     if (addAction) {
+  //       gridApi.api.setColumnDefs([...columns, ...actions]);
+  //     }
+  //   }
+  // }, [columns]);
+
   const handleClose = () => {
     setOpen(false);
     setIsEdit(false);
+    setShowDeleteModal(false);
   };
   const handleOpen = () => {
     setOpen(true);
   };
 
+  const handleDelete = () => {
+    setShowDeleteModal(true);
+  };
   return (
     <div className="App">
       <Grid style={{ paddingLeft: 16 }}>
@@ -99,17 +106,6 @@ function AdminTable({
               onChange={(tab: string) => handleTabChange(tab, gridApi)}
             />
           </Grid>
-          <Grid item textAlign="end">
-            <Button
-              onClick={handleOpen}
-              variant="outlined"
-              size="small"
-              style={{ color: "white" }}
-              startIcon={<AddIcon />}
-            >
-              Add
-            </Button>
-          </Grid>
         </Grid>
         <Grid className={"ag-theme-alpine"} style={{ height: 600 }}>
           <AgGridReact
@@ -120,19 +116,44 @@ function AdminTable({
             editType="fullRow"
             suppressClickEdit={true}
             rowSelection={"single"}
+            // onRowSelected={({data}) => allowEditing(data)}
+            onRowDoubleClicked={({ data }) => allowEditing(data)}
 
             // stopEditingWhenCellsLoseFocus={true}
           />
+          <div
+            style={{
+              height: "56px",
+              background: "#CBD5E1",
+              borderBottomLeftRadius: 10,
+              borderBottomRightRadius: 10,
+            }}
+          >
+            <Grid item textAlign="end" style={{ padding: 10 }}>
+              <Button
+                onClick={handleOpen}
+                variant="outlined"
+                size="medium"
+                style={{ color: "#081D35", background: "#FFFF" }}
+                startIcon={<AddIcon />}
+              >
+                Create new record
+              </Button>
+            </Grid>
+          </div>
         </Grid>
 
         <CreateUser
           open={open}
           handleClose={handleClose}
-          onSubmit={onSubmit}
+          onSubmit={(...arg) => onSubmit(...arg, handleClose)}
           initialState={initState}
           formConfig={formConfig}
-          handleDelete={onDeleting}
+          handleDelete={handleDelete}
           isEdit={isEdit}
+          showDeleteModal={showDeleteModal}
+          onDeleteModalCancel={onDeleteModalCancel}
+          onDeleteModalSubmit={onDeleteModalSubmit}
         />
       </Grid>
     </div>

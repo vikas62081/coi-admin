@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
@@ -6,14 +5,18 @@ import { Divider, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { DynamicFormBuilder } from "./create";
 import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
+import DeleteConfirmation from "../DeleteConfirmation";
 export type TuserProps = {
   open: boolean;
   handleClose: () => void;
   isEdit?: boolean;
-  onSubmit: (values: any) => void;
+  onSubmit: (values: any, isEdit: boolean) => void;
   formConfig: any;
   initialState: any;
   handleDelete: (data: any) => void;
+  showDeleteModal: boolean;
+  onDeleteModalSubmit: () => void;
+  onDeleteModalCancel: () => void;
 };
 function CreateUser({
   open,
@@ -23,8 +26,12 @@ function CreateUser({
   onSubmit,
   formConfig,
   initialState,
+  showDeleteModal,
+  onDeleteModalSubmit,
+  onDeleteModalCancel,
 }: TuserProps) {
-  const getFormHeader = (title = "CREATED BY") => {
+  const { created, updated } = initialState;
+  const getFormHeader = (title = "CREATED BY", timeStamp: string) => {
     return (
       <>
         <Typography variant="caption" fontWeight={600}>
@@ -32,7 +39,7 @@ function CreateUser({
         </Typography>
         <Typography variant="caption">Empower.Service.Identity</Typography>
         <Typography variant="caption" fontWeight={100}>
-          2022-08-05 16:32:56 00:00
+          {timeStamp}
         </Typography>
       </>
     );
@@ -88,34 +95,43 @@ function CreateUser({
                   }}
                 >
                   <Grid sm={6} item container direction="column">
-                    {getFormHeader("CREATED BY")}
+                    {getFormHeader("CREATED BY", created)}
                     <Divider orientation="vertical" />
                   </Grid>
 
                   <Grid sm={6} item container direction="column">
-                    {getFormHeader("UPDATED BY")}
+                    {getFormHeader("UPDATED BY", updated)}
                   </Grid>
                 </Grid>
               </Grid>
               <Grid item alignContent="end">
-                <Button
-                  variant="contained"
-                  color="warning"
-                  style={{ color: "#000", backgroundColor: "#F79577" }}
-                  startIcon={<DeleteTwoToneIcon />}
-                  onClick={() => handleDelete(initialState)}
-                >
-                  Delete record
-                </Button>
+                {!showDeleteModal && (
+                  <Button
+                    variant="contained"
+                    color="warning"
+                    style={{ color: "#000", backgroundColor: "#F79577" }}
+                    startIcon={<DeleteTwoToneIcon />}
+                    onClick={() => handleDelete(initialState)}
+                  >
+                    Delete record
+                  </Button>
+                )}
               </Grid>
             </Grid>
           )}
-          <DynamicFormBuilder
-            formConfig={formConfig}
-            onSubmit={onSubmit}
-            initialState={initialState}
-            isEdit={isEdit}
-          />
+          {showDeleteModal ? (
+            <DeleteConfirmation
+              onNegative={onDeleteModalCancel}
+              onPositive={onDeleteModalSubmit}
+            />
+          ) : (
+            <DynamicFormBuilder
+              formConfig={formConfig}
+              onSubmit={onSubmit}
+              initialState={initialState}
+              isEdit={isEdit}
+            />
+          )}
         </Box>
       </Drawer>
     </div>
