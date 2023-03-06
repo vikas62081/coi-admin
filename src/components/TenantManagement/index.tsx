@@ -163,7 +163,7 @@ const TenantManagement = () => {
     }
     closeForm();
   };
-  const onDeleting = ({ tenant_id }: any) => {
+  const onDelete = ({ tenant_id }: any) => {
     dispatch(deleteTenant(tenant_id));
   };
   return (
@@ -175,7 +175,7 @@ const TenantManagement = () => {
         onSubmit={onSubmit}
         // initialState={initialState}
         formConfig={userConfig}
-        onDeleting={onDeleting}
+        onDelete={onDelete}
       />
     </>
   );

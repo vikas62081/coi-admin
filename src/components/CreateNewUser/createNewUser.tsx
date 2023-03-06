@@ -13,22 +13,22 @@ export type TuserProps = {
   onSubmit: (values: any, isEdit: boolean) => void;
   formConfig: any;
   initialState: any;
-  handleDelete: (data: any) => void;
+  deleteModalShow: (data: any) => void;
   showDeleteModal: boolean;
-  onDeleteModalSubmit: () => void;
-  onDeleteModalCancel: () => void;
+  onDeleting: (initialState: any) => void;
+  deleteModalClose: () => void;
 };
 function CreateUser({
   open,
   handleClose,
-  handleDelete,
+  deleteModalShow,
   isEdit = false,
   onSubmit,
   formConfig,
   initialState,
   showDeleteModal,
-  onDeleteModalSubmit,
-  onDeleteModalCancel,
+  onDeleting,
+  deleteModalClose,
 }: TuserProps) {
   const { created, updated } = initialState;
   const getFormHeader = (title = "CREATED BY", timeStamp: string) => {
@@ -111,7 +111,7 @@ function CreateUser({
                     color="warning"
                     style={{ color: "#000", backgroundColor: "#F79577" }}
                     startIcon={<DeleteTwoToneIcon />}
-                    onClick={() => handleDelete(initialState)}
+                    onClick={deleteModalShow}
                   >
                     Delete record
                   </Button>
@@ -121,8 +121,9 @@ function CreateUser({
           )}
           {showDeleteModal ? (
             <DeleteConfirmation
-              onNegative={onDeleteModalCancel}
-              onPositive={onDeleteModalSubmit}
+              onCancel={deleteModalClose}
+              onSubmit={() => onDeleting(initialState)}
+              onViewRecord={handleClose}
             />
           ) : (
             <DynamicFormBuilder

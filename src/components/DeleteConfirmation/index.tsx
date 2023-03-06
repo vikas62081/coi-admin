@@ -1,6 +1,22 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
+import { useState } from "react";
 
-const DeleteConfirmation = ({ onNegative, onPositive }: any) => {
+interface DeleteConfirmationProps {
+  onCancel: () => void;
+  onSubmit: () => void;
+  onViewRecord: () => void;
+}
+
+const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({
+  onCancel,
+  onSubmit,
+  onViewRecord,
+}) => {
+  const [isRecordDeleted, setIsRecordDeleted] = useState(false);
+  const handleSubmit = () => {
+    setIsRecordDeleted(true);
+    onSubmit();
+  };
   return (
     <Box height="70vh">
       <Grid
@@ -13,7 +29,9 @@ const DeleteConfirmation = ({ onNegative, onPositive }: any) => {
       >
         <Grid item>
           <Typography variant="h5" fontWeight={600}>
-            Delete this record?
+            {isRecordDeleted
+              ? "Record has been deleted."
+              : "Delete this record?"}
           </Typography>
         </Grid>
         <Grid item>
@@ -28,31 +46,50 @@ const DeleteConfirmation = ({ onNegative, onPositive }: any) => {
         </Grid>
 
         <Grid container item spacing={5} justifyContent="center" paddingTop={2}>
-          <Grid xs={4} item>
-            <Button
-              variant="contained"
-              fullWidth
-              size="large"
-              color="secondary"
-              style={{ background: "#0C2744" }}
-              onClick={onNegative}
-            >
-              Cancel
-            </Button>
-          </Grid>
+          {isRecordDeleted ? (
+            <>
+              <Grid xs={7} item>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  size="large"
+                  color="secondary"
+                  style={{ background: "#0C2744" }}
+                  onClick={onViewRecord}
+                >
+                  View record
+                </Button>
+              </Grid>
+            </>
+          ) : (
+            <>
+              <Grid xs={4} item>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  size="large"
+                  color="secondary"
+                  style={{ background: "#0C2744" }}
+                  onClick={onCancel}
+                >
+                  Cancel
+                </Button>
+              </Grid>
 
-          <Grid xs={4} item>
-            <Button
-              variant="contained"
-              fullWidth
-              size="large"
-              color="secondary"
-              style={{ background: "#FAB49E", color: "#0C2744" }}
-              onClick={onPositive}
-            >
-              Delete record
-            </Button>
-          </Grid>
+              <Grid xs={4} item>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  size="large"
+                  color="secondary"
+                  style={{ background: "#FAB49E", color: "#0C2744" }}
+                  onClick={handleSubmit}
+                >
+                  Delete record
+                </Button>
+              </Grid>
+            </>
+          )}
         </Grid>
       </Grid>
     </Box>

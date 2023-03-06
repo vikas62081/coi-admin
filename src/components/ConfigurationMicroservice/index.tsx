@@ -39,7 +39,7 @@ const ConfigurationMicroservice = () => {
     }
     closeForm();
   };
-  const onDeleting = ({ configuration_id }: any) => {
+  const onDelete = ({ configuration_id }: any) => {
     console.log(configuration_id);
     dispatch(deleteConfiguration(configuration_id));
   };
@@ -52,7 +52,7 @@ const ConfigurationMicroservice = () => {
         onSubmit={onSubmit}
         initialState={{}}
         formConfig={userConfig}
-        onDeleting={onDeleting}
+        onDelete={onDelete}
       />
     </>
   );

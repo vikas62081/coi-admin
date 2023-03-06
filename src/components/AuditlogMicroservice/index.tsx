@@ -139,19 +139,30 @@ const AuditlogMicroservice = () => {
   const [data, setData] = useState([] as Auditlog[]);
 
   useEffect(() => {
-    jwtAxios.get('api/v1/auditlog').then((request) => setData(request.data));
-  },[]);
+    jwtAxios.get("api/v1/auditlog").then((request) => setData(request.data));
+  }, []);
 
-
+  const onSubmit = (values: any, isEdit: boolean, closeForm: any) => {
+    if (isEdit) {
+      console.log("editing");
+    } else {
+      console.log("Adding");
+    }
+    closeForm();
+  };
+  const onDelete = ({ tenant_id }: any) => {
+    console.log("deleting");
+  };
   return (
     <AdminTable
       rowData={data}
       columnData={columns}
       title="Auditlog Microservice"
-      onSubmit={(values: any) => console.log(values)}
       formConfig={userConfig}
+      onSubmit={onSubmit}
+      onDelete={onDelete}
     />
   );
-}
+};
 
 export default AuditlogMicroservice;

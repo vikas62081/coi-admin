@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Grid, Typography } from "@mui/material";
 import { AgGridReact } from "ag-grid-react";
 // import "ag-grid-enterprise";
@@ -8,20 +8,32 @@ import AddIcon from "@mui/icons-material/Add";
 import AdminHeader from "../AdminHeader/adminHeader";
 import CreateUser from "../CreateNewUser/createNewUser";
 import MyCoiToggleButton from "./Toggle";
-import ActionCellRenderer from "./ActionCellRenderer";
 
-function AdminTable({
+interface AdminTableProps {
+  rowData: any[];
+  columnData: any[];
+  title: string;
+  onSubmit: (values: any, isEdit: boolean, closeForm: () => void) => void;
+  formConfig: any[];
+  onDelete: (selectedRecord: any) => void;
+  initialState?: object;
+  TABS?: string[];
+  activeTab?: any;
+  handleTabChange?: (activeTab: any, gridApi: any) => void;
+}
+
+const AdminTable: React.FC<AdminTableProps> = ({
   rowData = [],
   columnData = [],
   title = "Configuration Microservice",
-  TABS,
+  TABS = [],
   activeTab,
   handleTabChange,
   onSubmit,
   initialState = {},
   formConfig,
-  onDeleting,
-}: any) {
+  onDelete,
+}) => {
   const [gridApi, setGridApi] = useState<any>();
   const [open, setOpen] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -42,13 +54,25 @@ function AdminTable({
     setIsEdit(true);
     setOpen(true);
   };
-  const onEditing = (data: any) => {
-    allowEditing(data);
-  };
-  const onDeleteModalCancel = () => {
+  const deleteModalClose = () => {
     setShowDeleteModal(false);
   };
-  const onDeleteModalSubmit = () => {};
+
+  const deleteModalShow = () => {
+    setShowDeleteModal(true);
+  };
+  const handleClose = () => {
+    setShowDeleteModal(false);
+    setIsEdit(false);
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const onGridReady = (params: any) => {
+    setGridApi(params);
+  };
   // const actions = [
   //   {
   //     headerName: "Actions",
@@ -65,10 +89,6 @@ function AdminTable({
   //   },
   // ];
 
-  const onGridReady = (params: any) => {
-    setGridApi(params);
-  };
-
   // const columns = gridApi?.api?.getColumnDefs();
   // useEffect(() => {
   //   if (columns) {
@@ -79,18 +99,6 @@ function AdminTable({
   //   }
   // }, [columns]);
 
-  const handleClose = () => {
-    setOpen(false);
-    setIsEdit(false);
-    setShowDeleteModal(false);
-  };
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDelete = () => {
-    setShowDeleteModal(true);
-  };
   return (
     <div className="App">
       <Grid style={{ paddingLeft: 16 }}>
@@ -100,10 +108,13 @@ function AdminTable({
             <Typography variant="h5" fontWeight={600} gutterBottom>
               {title}
             </Typography>
+
             <MyCoiToggleButton
               options={TABS}
               active={activeTab}
-              onChange={(tab: string) => handleTabChange(tab, gridApi)}
+              onChange={(tab: string) =>
+                handleTabChange && handleTabChange(tab, gridApi)
+              }
             />
           </Grid>
         </Grid>
@@ -118,8 +129,6 @@ function AdminTable({
             rowSelection={"single"}
             // onRowSelected={({data}) => allowEditing(data)}
             onRowDoubleClicked={({ data }) => allowEditing(data)}
-
-            // stopEditingWhenCellsLoseFocus={true}
           />
           <div
             style={{
@@ -149,15 +158,15 @@ function AdminTable({
           onSubmit={(...arg) => onSubmit(...arg, handleClose)}
           initialState={initState}
           formConfig={formConfig}
-          handleDelete={handleDelete}
+          deleteModalShow={deleteModalShow}
           isEdit={isEdit}
           showDeleteModal={showDeleteModal}
-          onDeleteModalCancel={onDeleteModalCancel}
-          onDeleteModalSubmit={onDeleteModalSubmit}
+          deleteModalClose={deleteModalClose}
+          onDeleting={onDelete}
         />
       </Grid>
     </div>
   );
-}
+};
 
 export default AdminTable;

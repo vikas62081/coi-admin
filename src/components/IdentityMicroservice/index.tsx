@@ -269,6 +269,17 @@ function IdentityMicroservice() {
     setCurrentForm(newUserConfig);
     gridApi.api.setColumnDefs(newColumns);
   };
+  const onSubmit = (values: any, isEdit: boolean, closeForm: any) => {
+    if (isEdit) {
+      console.log("editing");
+    } else {
+      console.log("Adding");
+    }
+    closeForm();
+  };
+  const onDelete = ({ tenant_id }: any) => {
+    console.log("deleting");
+  };
   return (
     <AdminTable
       rowData={DATA}
@@ -277,7 +288,8 @@ function IdentityMicroservice() {
       TABS={TABS}
       activeTab={activeTab}
       handleTabChange={handleTabChange}
-      onSubmit={(values: any) => console.log(values)}
+      onSubmit={onSubmit}
+      onDelete={onDelete}
       initialState={initialState}
       formConfig={currentForm}
     />
