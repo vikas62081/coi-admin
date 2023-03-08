@@ -11,3 +11,4 @@ import "./permission/group";
 import "./permission";
 import "./auditlog";
 import "./configuration";
+import "./identity";

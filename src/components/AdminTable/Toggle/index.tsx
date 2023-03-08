@@ -32,6 +32,7 @@ const MyCoiToggleButton = ({
     event: React.MouseEvent<HTMLElement>,
     newValue: string,
   ) => {
+    if (!newValue) return;
     onChange(newValue);
   };
 

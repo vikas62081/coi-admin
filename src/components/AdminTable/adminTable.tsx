@@ -65,6 +65,7 @@ const AdminTable: React.FC<AdminTableProps> = ({
     setShowDeleteModal(false);
     setIsEdit(false);
     setOpen(false);
+    setInitState({});
   };
 
   const handleOpen = () => {

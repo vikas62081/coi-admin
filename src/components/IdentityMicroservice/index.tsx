@@ -1,24 +1,27 @@
-import { useState } from "react";
-import ActionCellRenderer from "../AdminTable/ActionCellRenderer";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createIdentityRoles,
+  createIdentityUserRoles,
+  createIdentityUsers,
+  deleteIdentityRoles,
+  deleteIdentityUserRoles,
+  deleteIdentityUsers,
+  getIdentityRoles,
+  getIdentityUserRoles,
+  getIdentityUsers,
+  updateIdentityRoles,
+  updateIdentityUserRoles,
+  updateIdentityUsers,
+} from "../../redux/actions/Identity";
 import AdminTable from "../AdminTable/adminTable";
-const initialState = {
-  tenantName: "--select--",
-  username: "--select--",
-  email: "viksas@gmail.com",
-  emailConfirmed: true,
-  firstName: "First",
-  secondName: "",
-  lastName: "",
-  phone: "",
-  phoneConfirmed: true,
-  mfaEnabled: true,
-  deleted: false,
-};
-const TABS = ["Users", "Roles", "User to Roles"];
+import { ROLES, USERS, USER_TO_ROLES } from "../constant";
+
+const TABS = [USERS, ROLES, USER_TO_ROLES];
 const userConfig = [
   {
     title: "Tenant Name",
-    name: "tenantName",
+    name: "name",
     type: "select",
     required: true,
     size: "small",
@@ -47,27 +50,27 @@ const userConfig = [
   },
   {
     title: "Email Confirmed",
-    name: "emailConfirmed",
+    name: "email_confirmed",
     type: "switch",
     required: true,
   },
   {
     title: "First Name",
-    name: "firstName",
+    name: "first_name",
     type: "text",
     required: true,
     placeholder: "Enter first name",
   },
   {
     title: "Second Name",
-    name: "secondName",
+    name: "second_name",
     type: "text",
     required: true,
     placeholder: "Enter second name",
   },
   {
     title: "Last Name",
-    name: "lastName",
+    name: "last_name",
     type: "text",
     required: true,
     placeholder: "Enter last name",
@@ -81,19 +84,19 @@ const userConfig = [
   },
   {
     title: "Phone Confirmed",
-    name: "phoneConfirmed",
+    name: "phone_confirmed",
     type: "switch",
     required: true,
   },
   {
     title: "MFA Enabled",
-    name: "mfaEnabled",
+    name: "mfa_enabled",
     type: "switch",
     required: true,
   },
   {
     title: "Deleted",
-    name: "deleted",
+    name: "is_deleted",
     type: "switch",
     required: true,
   },
@@ -101,7 +104,7 @@ const userConfig = [
 const rolesConfig = [
   {
     title: "Tenant",
-    name: "tenantName",
+    name: "tenant",
     type: "select",
     required: true,
     size: "small",
@@ -112,7 +115,7 @@ const rolesConfig = [
   },
   {
     title: "User Role",
-    name: "username",
+    name: "userRole",
     type: "select",
     required: true,
     size: "small",
@@ -142,7 +145,7 @@ const userRolesConfig = [
   },
   {
     title: "User Role",
-    name: "userrole",
+    name: "userRole",
     type: "select",
     required: true,
     size: "small",
@@ -158,66 +161,50 @@ const userRolesConfig = [
     required: true,
   },
 ];
-const DATA = [
+
+const roleColumn = [
   {
-    name: "Tenant 1",
-    username: "tenant1",
-    email: "tenant1@example.com",
-    email_confirmed: true,
-    first_name: "Tenant",
-    second_name: "One",
-    last_name: "Don",
-    user_state: "active",
-    last_logged_at: "2022-12-01T10:00:00Z",
-    phone: "+1 123 456 7890",
-    phone_confirmed: true,
-    mfa_enabled: false,
-    user_roles: ["admin"],
-    created: "2022-11-01T10:00:00Z",
-    created_by: "system",
-    updated: "2022-11-10T10:00:00Z",
-    updated_by: "tenant1",
-    is_deleted: false,
+    headerName: "Tenant",
+    field: "tenant",
   },
   {
-    name: "Tenant 2",
-    username: "tenant2",
-    email: "tenant2@example.com",
-    email_confirmed: false,
-    first_name: "Tenant",
-    second_name: "Two",
-    last_name: "Don",
-    user_state: "inactive",
-    last_logged_at: "",
-    phone: "+1 123 456 7891",
-    phone_confirmed: false,
-    mfa_enabled: true,
-    user_roles: ["user"],
-    created: "2022-11-05T10:00:00Z",
-    created_by: "system",
-    updated: "",
-    updated_by: "",
-    is_deleted: false,
+    headerName: "User Role",
+    field: "userRole",
+  },
+
+  {
+    headerName: "Created By",
+    field: "createdBy",
   },
   {
-    name: "Tenant 3",
-    username: "tenant3",
-    email: "tenant3@example.com",
-    email_confirmed: true,
-    first_name: "Tenant",
-    second_name: "Three",
-    last_name: "Done",
-    user_state: "active",
-    last_logged_at: "2022-12-15T10:00:00Z",
-    phone: "+1 123 456 7892",
-    phone_confirmed: true,
-    mfa_enabled: true,
-    user_roles: ["admin", "user"],
-    created: "2022-11-10T10:00:00Z",
-    created_by: "tenant1",
-    updated: "2022-11-20T10:00:00Z",
-    updated_by: "tenant3",
-    is_deleted: false,
+    headerName: "Updated By",
+    field: "updatedBy",
+  },
+  {
+    headerName: "Deleted",
+    field: "deleted",
+  },
+];
+const userRoleColumn = [
+  {
+    headerName: "User Name",
+    field: "username",
+  },
+  {
+    headerName: "User Role",
+    field: "userRole",
+  },
+  {
+    headerName: "Created By",
+    field: "createdBy",
+  },
+  {
+    headerName: "Updated By",
+    field: "updatedBy",
+  },
+  {
+    headerName: "Deleted",
+    field: "deleted",
   },
 ];
 const columns = [
@@ -247,42 +234,78 @@ const columns = [
   { headerName: "Deleted", field: "is_deleted" },
 ];
 function IdentityMicroservice() {
-  const [activeTab, setActiveTab] = useState(TABS[0]);
+  const [activeTab, setActiveTab] = useState(USERS);
   const [currentForm, setCurrentForm] = useState(userConfig);
+  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+  const { userList, roleList, userRoleList } = useSelector(
+    (state: any) => state.identity,
+  );
+  const identityService: any = {
+    Users: {
+      data: userList,
+      column: columns,
+      form: userConfig,
+      get: () => dispatch(getIdentityUsers()),
+      create: (values: any) => dispatch(createIdentityUsers(values)),
+      update: (values: any) => dispatch(updateIdentityUsers(values)),
+      delete: ({ user_id }: any) => dispatch(deleteIdentityUsers(user_id)),
+    },
+    Roles: {
+      data: roleList,
+      column: roleColumn,
+      form: rolesConfig,
+      get: () => dispatch(getIdentityRoles()),
+      create: (values: any) => dispatch(createIdentityRoles(values)),
+      update: (values: any) => dispatch(updateIdentityRoles(values)),
+      delete: ({ role_id }: any) => dispatch(deleteIdentityRoles(role_id)),
+    },
+    "User to Roles": {
+      data: userRoleList,
+      column: userRoleColumn,
+      form: userRolesConfig,
+      get: () => dispatch(getIdentityUserRoles()),
+      create: (values: any) => dispatch(createIdentityUserRoles(values)),
+      update: (values: any) => dispatch(updateIdentityUserRoles(values)),
+      delete: ({ user_role_id }: any) =>
+        dispatch(deleteIdentityUserRoles(user_role_id)),
+    },
+  };
+  useEffect(() => {
+    dispatch(getIdentityUsers());
+    dispatch(getIdentityRoles());
+    dispatch(getIdentityUserRoles());
+  }, []);
+
+  useEffect(() => {
+    setData(identityService[activeTab]?.data ?? []);
+  }, [userList, roleList, userRoleList]);
 
   const handleTabChange = (newTab: string, gridApi: any) => {
     setActiveTab(newTab);
 
-    let newUserConfig: any = [];
-    let newColumns: any = [];
-    if (newTab === TABS[0]) {
-      newUserConfig = userConfig;
-      newColumns = columns;
-    } else if (newTab === TABS[1]) {
-      newUserConfig = rolesConfig;
-      newColumns = columns.slice(1, 5);
-    } else if (newTab === TABS[2]) {
-      newUserConfig = userRolesConfig;
-      newColumns = columns.slice(4, 10);
-    }
-
-    setCurrentForm(newUserConfig);
-    gridApi.api.setColumnDefs(newColumns);
+    const { data, column, form, get } = identityService[newTab];
+    // get();
+    setCurrentForm(form);
+    gridApi.api.setColumnDefs(column);
+    gridApi.api.setRowData(data);
   };
   const onSubmit = (values: any, isEdit: boolean, closeForm: any) => {
     if (isEdit) {
-      console.log("editing");
+      identityService[activeTab].update(values);
     } else {
-      console.log("Adding");
+      identityService[activeTab].create(values); // create
     }
     closeForm();
   };
-  const onDelete = ({ tenant_id }: any) => {
-    console.log("deleting");
+
+  const onDelete = (row: any) => {
+    identityService[activeTab].delete(row);
   };
+
   return (
     <AdminTable
-      rowData={DATA}
+      rowData={data}
       columnData={columns}
       title="Identity Microservice"
       TABS={TABS}
@@ -290,7 +313,7 @@ function IdentityMicroservice() {
       handleTabChange={handleTabChange}
       onSubmit={onSubmit}
       onDelete={onDelete}
-      initialState={initialState}
+      // initialState={initialState}
       formConfig={currentForm}
     />
   );
