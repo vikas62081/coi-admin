@@ -233,6 +233,7 @@ const columns = [
   { headerName: "Updated By", field: "updated_by" },
   { headerName: "Deleted", field: "is_deleted" },
 ];
+const editActionDisabledTabs = [USER_TO_ROLES];
 function IdentityMicroservice() {
   const [activeTab, setActiveTab] = useState(USERS);
   const [currentForm, setCurrentForm] = useState(userConfig);
@@ -315,6 +316,7 @@ function IdentityMicroservice() {
       onDelete={onDelete}
       // initialState={initialState}
       formConfig={currentForm}
+      editActionDisabled={editActionDisabledTabs.includes(activeTab)}
     />
   );
 }

@@ -20,6 +20,10 @@ interface AdminTableProps {
   TABS?: string[];
   activeTab?: any;
   handleTabChange?: (activeTab: any, gridApi: any) => void;
+  allowEdit?: boolean;
+  allowCreate?: boolean;
+  editActionDisabled?: boolean;
+  createActionDisabled?: boolean;
 }
 
 const AdminTable: React.FC<AdminTableProps> = ({
@@ -33,6 +37,10 @@ const AdminTable: React.FC<AdminTableProps> = ({
   initialState = {},
   formConfig,
   onDelete,
+  allowEdit = true,
+  allowCreate = true,
+  editActionDisabled = false,
+  createActionDisabled = false,
 }) => {
   const [gridApi, setGridApi] = useState<any>();
   const [open, setOpen] = useState<boolean>(false);
@@ -50,6 +58,7 @@ const AdminTable: React.FC<AdminTableProps> = ({
     minWidth: 120,
   };
   const allowEditing = (data: any) => {
+    if (!allowEdit) return;
     setInitState(data);
     setIsEdit(true);
     setOpen(true);
@@ -131,26 +140,28 @@ const AdminTable: React.FC<AdminTableProps> = ({
             // onRowSelected={({data}) => allowEditing(data)}
             onRowDoubleClicked={({ data }) => allowEditing(data)}
           />
-          <div
-            style={{
-              height: "56px",
-              background: "#CBD5E1",
-              borderBottomLeftRadius: 10,
-              borderBottomRightRadius: 10,
-            }}
-          >
-            <Grid item textAlign="end" style={{ padding: 10 }}>
-              <Button
-                onClick={handleOpen}
-                variant="outlined"
-                size="medium"
-                style={{ color: "#081D35", background: "#FFFF" }}
-                startIcon={<AddIcon />}
-              >
-                Create new record
-              </Button>
+          {allowCreate && (
+            <Grid
+              style={{
+                height: "56px",
+                background: "#CBD5E1",
+                borderBottomLeftRadius: 10,
+                borderBottomRightRadius: 10,
+              }}
+            >
+              <Grid item textAlign="end" style={{ padding: 10 }}>
+                <Button
+                  onClick={handleOpen}
+                  variant="outlined"
+                  size="medium"
+                  style={{ color: "#081D35", background: "#FFFF" }}
+                  startIcon={<AddIcon />}
+                >
+                  Create new record
+                </Button>
+              </Grid>
             </Grid>
-          </div>
+          )}
         </Grid>
 
         <CreateUser
@@ -164,6 +175,8 @@ const AdminTable: React.FC<AdminTableProps> = ({
           showDeleteModal={showDeleteModal}
           deleteModalClose={deleteModalClose}
           onDeleting={onDelete}
+          editActionDisabled={editActionDisabled}
+          createActionDisabled={createActionDisabled}
         />
       </Grid>
     </div>

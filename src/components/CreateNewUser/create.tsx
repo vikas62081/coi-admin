@@ -19,6 +19,8 @@ export const DynamicFormBuilder = ({
   initialState = {},
   onSubmit,
   isEdit = false,
+  editActionDisabled = false,
+  createActionDisabled = false,
 }: any) => {
   const [values, setValues] = useState(initialState);
 
@@ -72,6 +74,10 @@ export const DynamicFormBuilder = ({
                 border: "none",
                 backgroundColor: "#F2F5FA",
               }}
+              disabled={
+                (isEdit && editActionDisabled) ||
+                (!isEdit && createActionDisabled)
+              }
             >
               Cancel
             </Button>
@@ -83,13 +89,23 @@ export const DynamicFormBuilder = ({
               fullWidth
               size="large"
               color="secondary"
-              style={{ background: "#0C2744" }}
+              style={{ background: "#0C2744", color: "#ffffff" }}
               type="submit"
+              disabled={
+                (isEdit && editActionDisabled) ||
+                (!isEdit && createActionDisabled)
+              }
             >
               {isEdit ? "Save and update" : "Create new record"}
             </Button>
           </Grid>
         </Grid>
+        {isEdit && editActionDisabled && (
+          <Typography variant="caption">*Edit Action not allowed</Typography>
+        )}
+        {!isEdit && createActionDisabled && (
+          <Typography variant="caption">*Create Action not allowed</Typography>
+        )}
       </Grid>
     </form>
   );
@@ -151,6 +167,7 @@ const getFormBuilder = (object: any, values: any, onChange: any) => {
             />
           }
           label={values[object?.name] ? "YES" : "NO"}
+          disabled={object?.disabled}
         />
       </FormGroup>
     );

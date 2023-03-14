@@ -17,6 +17,8 @@ export type TuserProps = {
   showDeleteModal: boolean;
   onDeleting: (initialState: any) => void;
   deleteModalClose: () => void;
+  editActionDisabled?: boolean;
+  createActionDisabled?: boolean;
 };
 function CreateUser({
   open,
@@ -29,6 +31,8 @@ function CreateUser({
   showDeleteModal,
   onDeleting,
   deleteModalClose,
+  editActionDisabled,
+  createActionDisabled,
 }: TuserProps) {
   const { created, updated } = initialState;
   const getFormHeader = (title = "CREATED BY", timeStamp: string) => {
@@ -131,6 +135,8 @@ function CreateUser({
               onSubmit={onSubmit}
               initialState={initialState}
               isEdit={isEdit}
+              editActionDisabled={editActionDisabled}
+              createActionDisabled={createActionDisabled}
             />
           )}
         </Box>

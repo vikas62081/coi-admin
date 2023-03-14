@@ -161,6 +161,8 @@ const AuditlogMicroservice = () => {
       formConfig={userConfig}
       onSubmit={onSubmit}
       onDelete={onDelete}
+      allowEdit={false}
+      allowCreate={false}
     />
   );
 };
