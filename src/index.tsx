@@ -1,18 +1,21 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import './services';
+import "./services";
 import reportWebVitals from "./reportWebVitals";
 import ReduxProvider from "./redux/store/reduxProvider";
 
 import AppRouter from "./Router";
+import AppThemeProvider from "./theme";
 
 const root = createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <React.StrictMode>
-    <ReduxProvider>
-      <AppRouter />
-    </ReduxProvider>
+    <AppThemeProvider>
+      <ReduxProvider>
+        <AppRouter />
+      </ReduxProvider>
+    </AppThemeProvider>
   </React.StrictMode>,
 );
 

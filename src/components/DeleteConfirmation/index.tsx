@@ -53,8 +53,7 @@ const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({
                   variant="contained"
                   fullWidth
                   size="large"
-                  color="secondary"
-                  style={{ background: "#0C2744" }}
+                  color="primary"
                   onClick={onViewRecord}
                 >
                   View record
@@ -68,8 +67,7 @@ const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({
                   variant="contained"
                   fullWidth
                   size="large"
-                  color="secondary"
-                  style={{ background: "#0C2744" }}
+                  color="primary"
                   onClick={onCancel}
                 >
                   Cancel
@@ -81,8 +79,7 @@ const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({
                   variant="contained"
                   fullWidth
                   size="large"
-                  color="secondary"
-                  style={{ background: "#FAB49E", color: "#0C2744" }}
+                  color="warning"
                   onClick={handleSubmit}
                 >
                   Delete record

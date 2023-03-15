@@ -38,11 +38,13 @@ function CreateUser({
   const getFormHeader = (title = "CREATED BY", timeStamp: string) => {
     return (
       <>
-        <Typography variant="caption" fontWeight={600}>
+        <Typography variant="caption" fontWeight={600} color="primary">
           {title}
         </Typography>
-        <Typography variant="caption">Empower.Service.Identity</Typography>
-        <Typography variant="caption" fontWeight={100}>
+        <Typography variant="caption" color="primary">
+          Empower.Service.Identity
+        </Typography>
+        <Typography variant="caption" fontWeight={100} color="primary">
           {timeStamp}
         </Typography>
       </>
@@ -74,7 +76,7 @@ function CreateUser({
             <Grid item alignContent="end">
               <Button
                 variant="text"
-                style={{ color: "#fff" }}
+                color="secondary"
                 startIcon={<CloseIcon />}
                 onClick={handleClose}
               >
@@ -93,7 +95,6 @@ function CreateUser({
                   columnSpacing={1}
                   style={{
                     background: "#C6E0F6",
-                    color: "#000",
                     borderRadius: 4,
                     padding: 8,
                   }}
@@ -113,7 +114,6 @@ function CreateUser({
                   <Button
                     variant="contained"
                     color="warning"
-                    style={{ color: "#000", backgroundColor: "#F79577" }}
                     startIcon={<DeleteTwoToneIcon />}
                     onClick={deleteModalShow}
                   >

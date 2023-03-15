@@ -67,13 +67,8 @@ export const DynamicFormBuilder = ({
               variant="outlined"
               fullWidth
               size="large"
-              color="secondary"
+              color="primary"
               type="reset"
-              style={{
-                color: "#0C2744",
-                border: "none",
-                backgroundColor: "#F2F5FA",
-              }}
               disabled={
                 (isEdit && editActionDisabled) ||
                 (!isEdit && createActionDisabled)
@@ -88,8 +83,7 @@ export const DynamicFormBuilder = ({
               variant="contained"
               fullWidth
               size="large"
-              color="secondary"
-              style={{ background: "#0C2744", color: "#ffffff" }}
+              color="primary"
               type="submit"
               disabled={
                 (isEdit && editActionDisabled) ||

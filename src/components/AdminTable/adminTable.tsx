@@ -154,7 +154,7 @@ const AdminTable: React.FC<AdminTableProps> = ({
                   onClick={handleOpen}
                   variant="outlined"
                   size="medium"
-                  style={{ color: "#081D35", background: "#FFFF" }}
+                  color="primary"
                   startIcon={<AddIcon />}
                 >
                   Create new record
